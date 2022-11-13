@@ -58,26 +58,33 @@
 </script>
 <template>
 
-    <h2>Signup</h2>
-    <form action="">
-        <div>
-            <label for="username">Username</label>
-            <input type="text" name="username" v-model="username">
-        </div>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" name="email" v-model="email">
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" v-model="password">
-        </div>
-        <p class="error-input" v-if="credentialsError">Input fields cannot be empty</p>
-        <input type="button" value="Create Account" @click="handleSignUp">
-    </form>
+    <section class="signup">
+        <h2>Signup</h2>
+        <form action="">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" name="username" v-model="username">
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" name="email" v-model="email">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" name="password" v-model="password">
+            </div>
+            <p class="error-input" v-if="credentialsError">Input fields cannot be empty</p>
+            <input type="button" value="Create Account" @click="handleSignUp">
+        </form>
+    </section>
 </template>
 
 <style scoped>
+    .signup {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 1rem;
+    }
     .error-input {
         color: red;
         font-size: 0.8em;

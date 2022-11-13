@@ -70,9 +70,7 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 1rem;
+
 }
 
 /* Light mode */
@@ -105,4 +103,8 @@ button:focus-visible {
   .light img, .light .toggle-up {
     filter: invert(47%) sepia(20%) saturate(603%) hue-rotate(121deg) brightness(87%) contrast(88%) !important;
 
+  }
+
+  .light header {
+    color: rgba(255, 255, 255, 0.87) !important;
   }

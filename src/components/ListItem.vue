@@ -7,19 +7,20 @@ type ShopItem = {
     favorite?: boolean,
     itemIsDone: boolean
 }
+
     export default {
-        props: ["listItem"],
-        emits: ["updateLoading", "updateError", "getList"],
+        props: ["listItem", "deleteOverlay"],
+        emits: ["updateLoading", "updateError", "getList", "addToDelete", "filterList"],
         methods: {
             async updateAmount (item: any, add: boolean) {
-                this.$emit('updateLoading')
                 const username = localStorage.getItem('username')
                 const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
                 // const accountId = localStorage.getItem('accountKey')
                 if(item.amount == 1 && !add) {
-                    this.$emit('updateLoading')
+                    this.removeItem(this.listItem)
                     return
                 }
+                this.$emit('updateLoading')
                 if(!username && !accountId) {
 
                 } else {
@@ -43,6 +44,7 @@ type ShopItem = {
                     if(data.success) {
                             this.$emit('updateLoading')
                             this.$emit('getList')
+                            this.listItem.amount = add ? this.listItem.amount + 1 : this.listItem.amount - 1
                         }
     
                     else {
@@ -90,22 +92,77 @@ type ShopItem = {
             }
             },
             itemIsDone() {
-                this.listItem.itemIsDone = !this.listItem.itemIsDone
-                
+                this.listItem.itemIsDone = !this.listItem.itemIsDone                
+            },
+            async addFavorite() {
+                this.$emit('updateLoading')
+                const body = JSON.stringify(this.listItem)
+                const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
+                // const accountId = localStorage.getItem('accountKey')
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'accountid': accountId, 'Content-Type': 'application/json' },
+                    body: body
+                };
+                const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/favorites`, requestOptions)
+                if(response.ok) {                    
+                    const data = await response.json();
+                    if(data.success) {
+                        this.$emit('updateLoading')
+                        this.listItem.favorite = true
+                    }    
+                    else {
+                        this.$emit('updateLoading')
+                        this.$emit('updateError')
+                    }
+                } else {
+                    this.$emit('updateLoading')
+                    this.$emit('updateError')
+                }
+            },
+            async removeFavorite() {
+                this.$emit('updateLoading')
+                const body = JSON.stringify(this.listItem)
+                const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
+                // const accountId = localStorage.getItem('accountKey')
+                const requestOptions = {
+                    method: 'DELETE',
+                    headers: { 'accountid': accountId, 'Content-Type': 'application/json' },
+                    body: body
+                };
+                const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/favorites`, requestOptions)
+                if(response.ok) {                    
+                    const data = await response.json();
+                    if(data.success) {
+                        this.$emit('updateLoading')
+                        this.listItem.favorite = false
+                    }    
+                    else {
+                        this.$emit('updateLoading')
+                        this.$emit('updateError')
+                    }
+                } else {
+                    this.$emit('updateLoading')
+                    this.$emit('updateError')
+                }
             }
+
         }
     }
 </script>
 <template>
     <div class="item-container" :class="{'item-done' : listItem.itemIsDone}">
         <div class="top-container">
+            <img @click="removeFavorite" v-if="listItem.favorite" src="../assets/favorite-fill.svg" alt="">
+            <img @click="addFavorite" v-else src="../assets/favorite-empty.svg" alt="">
             <p class="item-name" @click="itemIsDone">{{listItem.item}}</p>
             <div class="amount-container">
                 <img src="../assets/minus.svg" @click="updateAmount(listItem, false)" alt="">
                 <p>{{listItem.amount}} </p>
                 <img src="../assets/plus.svg" @click="updateAmount(listItem, true)" alt="">
             </div>
-            <img src="../assets/cross.svg" @click="removeItem(listItem)" alt="">
+            <input v-if="deleteOverlay" @click="$emit('addToDelete', $event, listItem)" type="checkbox" name="" id="">
+            <img v-else src="../assets/cross.svg" @click="removeItem(listItem)" alt="">
         </div>
         <p v-if="listItem.comment" class="item-comment">{{listItem.comment}}</p>
     </div>

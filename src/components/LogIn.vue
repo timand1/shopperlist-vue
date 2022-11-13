@@ -53,23 +53,30 @@
     }
 </script>
 <template>
-    <h2>Login</h2>
-    <form action="">
-        <div>
-            <label for="username">Username</label>
-            <input type="text" name="username" v-model="username">
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" v-model="password">
-        </div>
-        <p class="error-input" v-if="credentialsError">Input fields cannot be empty</p>
-        <input type="button" value="Login" @click="handleLogin">
-    </form>
-    <p class="sign-up">Don't have an account? <router-link to="/signup"><span>Sign Up</span></router-link> </p>
+    <section class="login">
+        <h2>Login</h2>
+        <form action="">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" name="username" v-model="username">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" name="password" v-model="password">
+            </div>
+            <p class="error-input" v-if="credentialsError">Input fields cannot be empty</p>
+            <input type="button" value="Login" @click="handleLogin">
+        </form>
+        <p class="sign-up">Don't have an account? <router-link to="/signup"><span>Sign Up</span></router-link> </p>
+    </section>
 </template>
 
 <style scoped>
+.login {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem;
+}
     .sign-up {
         font-size: 0.8em;
     }

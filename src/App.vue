@@ -41,12 +41,12 @@ export default {
 
 <template>
   <div v-if="loading" class="loading"></div>
-  <div class="switch">
+  <!-- <div class="switch"> -->
       <label class="theme-switch" for="checkbox">
           <input type="checkbox" id="checkbox"  @click="setDarkMode"  />
           <div class="slider round"></div>
       </label>
-  </div>
+  <!-- </div> -->
   <router-view  @updateLoading="updateLoading" @updateError="updateError"/>
 </template>
 
@@ -85,16 +85,20 @@ export default {
           transform: rotate(360deg);
         }
       }
-.switch {
+/* .switch {
     text-align: end;
     height: 100px;
-}
+} */
     
 .theme-switch {
-  display: inline-block;
+  /* display: inline-block; */
   height: 34px;
-  position: relative;
+  /* position: relative; */
   width: 60px;
+  position: fixed;
+  right: 1em;
+  top: 1em;
+  z-index: 999;
 }
 
 .theme-switch input {
@@ -110,6 +114,7 @@ export default {
   right: 0;
   top: 0;
   transition: .4s;
+  z-index: 999;
 }
 
 .slider:before {
