@@ -23,7 +23,7 @@
                         username: this.username,
                         password: this.password
                     }
-
+                    this.$emit('updateLoading')
                     const requestOptions = {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -54,13 +54,15 @@
 </script>
 <template>
     <section class="login">
+        <h1>Vueshopper</h1>
         <h2>Login</h2>
+        <img src="../assets/logo.svg" alt="">
         <form action="">
-            <div>
+            <div class="input-container">
                 <label for="username">Username</label>
                 <input type="text" name="username" v-model="username">
             </div>
-            <div>
+            <div class="input-container">
                 <label for="password">Password</label>
                 <input type="password" name="password" v-model="password">
             </div>
@@ -72,11 +74,46 @@
 </template>
 
 <style scoped>
-.login {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 1rem;
-}
+    .login {
+        margin-top: 4em;
+        width: 90%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1 {
+        margin: 0 auto;
+    }
+
+    img {
+        width: 40vw;
+        margin: 4em auto;
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .input-container {
+        display: flex;
+        gap: 1em;
+    }
+
+    input[type="button"] {
+        align-self: center;
+        padding: 0.8em 0.8em;
+        margin-top: 1em;
+        border: none;
+    }
+
+    input, label {
+        flex: 1;
+        font-weight: 700;
+    }
     .sign-up {
         font-size: 0.8em;
     }
@@ -84,4 +121,15 @@
         cursor: pointer;
         color: steelblue;
     }
+    @media screen and (min-width: 786px) {
+        .login {
+            max-width: 40vw;
+            margin: 0 auto;
+            margin-top: 4em;
+        }
+
+        img {
+            width: 15vw;
+        }
+  }
 </style>

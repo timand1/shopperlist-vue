@@ -97,53 +97,59 @@ type ShopItem = {
             async addFavorite() {
                 this.$emit('updateLoading')
                 const body = JSON.stringify(this.listItem)
-                const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
-                // const accountId = localStorage.getItem('accountKey')
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 'accountid': accountId, 'Content-Type': 'application/json' },
-                    body: body
-                };
-                const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/favorites`, requestOptions)
-                if(response.ok) {                    
-                    const data = await response.json();
-                    if(data.success) {
-                        this.$emit('updateLoading')
-                        this.listItem.favorite = true
-                    }    
-                    else {
+                const accountId = localStorage.getItem('accountKey')
+                if(accountId) {
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: { 'accountid': accountId, 'Content-Type': 'application/json' },
+                        body: body
+                    };
+                    const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/favorites`, requestOptions)
+                    if(response.ok) {                    
+                        const data = await response.json();
+                        if(data.success) {
+                            this.$emit('updateLoading')
+                            this.listItem.favorite = true
+                        }    
+                        else {
+                            this.$emit('updateLoading')
+                            this.$emit('updateError')
+                        }
+                    } else {
                         this.$emit('updateLoading')
                         this.$emit('updateError')
                     }
                 } else {
-                    this.$emit('updateLoading')
-                    this.$emit('updateError')
+                    this.$router.push('/')
                 }
             },
             async removeFavorite() {
                 this.$emit('updateLoading')
                 const body = JSON.stringify(this.listItem)
-                const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
-                // const accountId = localStorage.getItem('accountKey')
-                const requestOptions = {
-                    method: 'DELETE',
-                    headers: { 'accountid': accountId, 'Content-Type': 'application/json' },
-                    body: body
-                };
-                const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/favorites`, requestOptions)
-                if(response.ok) {                    
-                    const data = await response.json();
-                    if(data.success) {
-                        this.$emit('updateLoading')
-                        this.listItem.favorite = false
-                    }    
-                    else {
+                const accountId = localStorage.getItem('accountKey')
+                if(accountId) {
+                    const requestOptions = {
+                        method: 'DELETE',
+                        headers: { 'accountid': accountId, 'Content-Type': 'application/json' },
+                        body: body
+                    };
+                    const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/favorites`, requestOptions)
+                    if(response.ok) {                    
+                        const data = await response.json();
+                        if(data.success) {
+                            this.$emit('updateLoading')
+                            this.listItem.favorite = false
+                        }    
+                        else {
+                            this.$emit('updateLoading')
+                            this.$emit('updateError')
+                        }
+                    } else {
                         this.$emit('updateLoading')
                         this.$emit('updateError')
                     }
                 } else {
-                    this.$emit('updateLoading')
-                    this.$emit('updateError')
+                    this.$router.push('/')
                 }
             }
 

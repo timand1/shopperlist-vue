@@ -80,25 +80,28 @@ export default  defineComponent({
                         item: this.newFavorite,
                         id: uid()
                     }
-                    
-                    const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
-                    // const accountId = localStorage.getItem('accountKey')
-                    const body = JSON.stringify(addedFavorite)
-                    const requestOptions = {
-                        method: 'POST',
-                        headers: { 'accountid': accountId, 'Content-Type': 'application/json' },
-                        body: body
-                    };
-                    const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/favorites`, requestOptions)
-                    const data = await response.json();
-                    if(data.success) {
-                        this.$emit('updateLoading')                    
-                        this.getFavorites()
+                
+                    const accountId = localStorage.getItem('accountKey')
+                    if(accountId) {
+                        const body = JSON.stringify(addedFavorite)
+                        const requestOptions = {
+                            method: 'POST',
+                            headers: { 'accountid': accountId, 'Content-Type': 'application/json' },
+                            body: body
+                        };
+                        const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/favorites`, requestOptions)
+                        const data = await response.json();
+                        if(data.success) {
+                            this.$emit('updateLoading')                    
+                            this.getFavorites()
+                        }
+    
+                    else {
+                        this.$emit('updateError')
                     }
-
-                else {
-                    this.$emit('updateError')
-                }
+                    } else {
+                        this.$router.push('/')
+                    }
                 }
             },
             updateLoading () {        

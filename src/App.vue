@@ -14,10 +14,8 @@ export default {
       }
     },
     beforeMount() {
-      // const username = localStorage.getItem('username')
-      // const accountId = localStorage.getItem('accountKey')
-      const username = 'timelie'
-      const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
+      const username = localStorage.getItem('username')
+      const accountId = localStorage.getItem('accountKey')
       if(username && accountId) {
         this.$router.push('/lists')
       }

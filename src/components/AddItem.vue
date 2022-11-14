@@ -43,34 +43,33 @@ type ShopItem = {
                     comment: this.comment
                 }
                 const username = localStorage.getItem('username')
-                const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
-                // const accountId = localStorage.getItem('accountKey')
-                if(!username && !accountId) {
-
-                } else {
-
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 'accountid': accountId, 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newItem)
-                };
-                const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/shoppinglist`, requestOptions)
-                if(response.ok) {
-
-                    const data = await response.json();
-                    if(data.success) {
-                            this.$emit('updateLoading')
-                            this.$emit('getList')
-                        }
+                const accountId = localStorage.getItem('accountKey')
+                if(username && accountId) {
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: { 'accountid': accountId, 'Content-Type': 'application/json' },
+                        body: JSON.stringify(newItem)
+                    };
+                    const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/shoppinglist`, requestOptions)
+                    if(response.ok) {
     
-                    else {
+                        const data = await response.json();
+                        if(data.success) {
+                                this.$emit('updateLoading')
+                                this.$emit('getList')
+                            }
+        
+                        else {
+                            this.$emit('updateError')
+                        }
+                    } else {
+                        this.$emit('updateLoading')
                         this.$emit('updateError')
                     }
+
                 } else {
-                    this.$emit('updateLoading')
-                    this.$emit('updateError')
+                    this.$router.push('/')
                 }
-            }
                 
             }
         }

@@ -37,14 +37,12 @@ type FavoriteItem = {
       },
       beforeMount() {
           const username = localStorage.getItem('username')
-          const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
-
-          // const accountId = localStorage.getItem('accountKey')
-          if(!username && !accountId) {
-              this.$router.push('/')
-          } else {
+          const accountId = localStorage.getItem('accountKey')
+          if(username && accountId) {
             this.getList()
             this.getFavorites()
+          } else {
+            this.$router.push('/')
           }
           
       },
@@ -61,55 +59,52 @@ type FavoriteItem = {
           async getList () {
                 this.$emit('updateLoading')
                 const username = localStorage.getItem('username')
-                const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
-                // const accountId = localStorage.getItem('accountKey')
-                if(!username && !accountId) {
-
+                const accountId = localStorage.getItem('accountKey')
+                if(username && accountId) {
+                  const requestOptions = {
+                      method: 'GET',
+                      headers: { 'accountid': accountId, 'Content-Type': 'application/json' }
+                  };
+                  const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/shoppinglist`, requestOptions)
+  
+                  const data = await response.json();
+                  if(data.success) {
+                      this.$emit('updateLoading')
+                          this.shoppingList = data.list
+                          localStorage.setItem('shopperList', JSON.stringify(data.list))
+                      }
+  
+                  else {
+                      this.$emit('updateError')
+                  }
                 } else {
-
-                const requestOptions = {
-                    method: 'GET',
-                    headers: { 'accountid': accountId, 'Content-Type': 'application/json' }
-                };
-                const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/shoppinglist`, requestOptions)
-
-                const data = await response.json();
-                if(data.success) {
-                    this.$emit('updateLoading')
-                        this.shoppingList = data.list
-                        localStorage.setItem('shopperList', JSON.stringify(data.list))
-                    }
-
-                else {
-                    this.$emit('updateError')
-                }
+                  this.$router.push('/')
             }
             },
             async getFavorites () {
                 this.$emit('updateLoading')
                 const username = localStorage.getItem('username')
-                const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
-                // const accountId = localStorage.getItem('accountKey')
-                if(!username && !accountId) {
-
+                const accountId = localStorage.getItem('accountKey')
+                if(username && accountId) {
+                  const requestOptions = {
+                      method: 'GET',
+                      headers: { 'accountid': accountId, 'Content-Type': 'application/json' }
+                  };
+                  const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/favorites`, requestOptions)
+  
+                  const data = await response.json();
+                  if(data.success) {
+                      this.$emit('updateLoading')                    
+                      this.favorites = data.favorites
+                      localStorage.setItem('favorites', JSON.stringify(data.favorites))
+                      }
+  
+                  else {
+                      this.$emit('updateError')
+                  }
+                  
                 } else {
-
-                const requestOptions = {
-                    method: 'GET',
-                    headers: { 'accountid': accountId, 'Content-Type': 'application/json' }
-                };
-                const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/favorites`, requestOptions)
-
-                const data = await response.json();
-                if(data.success) {
-                    this.$emit('updateLoading')                    
-                    this.favorites = data.favorites
-                    localStorage.setItem('favorites', JSON.stringify(data.favorites))
-                    }
-
-                else {
-                    this.$emit('updateError')
-                }
+                  this.$router.push('/')
             }
             },
       }

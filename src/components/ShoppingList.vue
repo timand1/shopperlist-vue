@@ -43,21 +43,17 @@ export default  defineComponent({
             async getList () {
                 this.$emit('updateLoading')
                 const username = localStorage.getItem('username')
-                const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
-                // const accountId = localStorage.getItem('accountKey')
-                if(!username && !accountId) {
-
-                } else {
-
-                const requestOptions = {
-                    method: 'GET',
-                    headers: { 'accountid': accountId, 'Content-Type': 'application/json' }
-                };
-                const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/shoppinglist`, requestOptions)
-
-                const data = await response.json();
-                if(data.success) {
-                    this.$emit('updateLoading')
+                const accountId = localStorage.getItem('accountKey')
+                if(username && accountId) {
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: { 'accountid': accountId, 'Content-Type': 'application/json' }
+                    };
+                    const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/shoppinglist`, requestOptions)
+    
+                    const data = await response.json();
+                    if(data.success) {
+                        this.$emit('updateLoading')
                         this.shoppingList = data.list
                         localStorage.setItem('shopperList', JSON.stringify(data.list))
                         const favorites: FavoriteItem[] | null  =  JSON.parse(localStorage.getItem('favorites') || "") 
@@ -69,11 +65,13 @@ export default  defineComponent({
                             };
                             })
                         }
-                }
-
-                else {
-                    this.$emit('updateError')
-                }
+                    }
+    
+                    else {
+                        this.$emit('updateError')
+                    }
+                } else {
+                    this.$router.push('/')
             }
             },
            toggleShowAdd() {
@@ -89,31 +87,30 @@ export default  defineComponent({
 
             this.$emit('updateLoading')
                 const username = localStorage.getItem('username')
-                const accountId = 'd498cbb6-3396-442c-bcd8-fcf15e2c4756'
-                // const accountId = localStorage.getItem('accountKey')
-                if(!username && !accountId) {
-
-                } else {
-
-                const requestOptions = {
-                    method: 'DELETE',
-                    headers: { 'accountid': accountId, 'Content-Type': 'application/json' }
-                };
-                const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/shoppinglist/all`, requestOptions)
-                if(response.ok) {
-
-                    const data = await response.json();
-                    if(data.success) {
-                        this.$emit('updateLoading')
-                    }
+                const accountId = localStorage.getItem('accountKey')
+                if(username && accountId) {
+                    const requestOptions = {
+                        method: 'DELETE',
+                        headers: { 'accountid': accountId, 'Content-Type': 'application/json' }
+                    };
+                    const response = await fetch(`https://dramatic-bottlenose-hallway.glitch.me/api/shoppinglist/all`, requestOptions)
+                    if(response.ok) {
     
-                    else {
+                        const data = await response.json();
+                        if(data.success) {
+                            this.$emit('updateLoading')
+                        }
+        
+                        else {
+                            this.$emit('updateError')
+                        }
+                    } else {
+                        this.$emit('updateLoading')
                         this.$emit('updateError')
                     }
+
                 } else {
-                    this.$emit('updateLoading')
-                    this.$emit('updateError')
-                }
+                    this.$router.push('/')
             }
           },
           deleteMode() {
@@ -123,7 +120,6 @@ export default  defineComponent({
             this.deleteOverlay = false
           },
           addToDelete(e: any, item:ShopItem) {
-              console.log(this.deleteArr);
             if(e.target.checked) {
                 this.deleteArr.push(item)
                 
