@@ -133,6 +133,7 @@ export default  defineComponent({
     input {
         flex: 6;
         border: none;
+        outline: 1px solid black;
     }
     button {
         border-radius: 0;

@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-* {
-  color: rgba(255, 255, 255, 0.87);
-}
+
 html {
   font-family: "Roboto Condensed", sans-serif;
   font-size: 16px;
@@ -54,7 +52,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #4c7972;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -74,28 +73,31 @@ button:focus-visible {
 
 }
 
+
 /* Light mode */
-  * .light {
+  .light {
     color: #4c7972 !important;
-    background-color: #ffffff !important;
+    background-color: rgb(240, 240, 240)
   }
   .light a:hover {
     color: #747bff !important;
   }
   .light button {
     background-color: #4c7972 !important;
+    color: rgba(255, 255, 255, 0.87) !important;
   }
   .light input[type='button'] {
     background-color: #4c7972 !important;
+    color: rgba(255, 255, 255, 0.87) !important;
   }
 
   .light .toggle-list {
     background: #9b9b9b !important;
+    color: rgba(255, 255, 255, 0.87) !important;
   }
   
   .light .toggle-list:hover {
     background: #6a7c70 !important;
-    color: rgba(255, 255, 255, 0.87) !important;
   }
   .light .list-active {
       background: #9fbea6 !important;

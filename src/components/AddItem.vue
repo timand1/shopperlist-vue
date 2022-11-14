@@ -125,6 +125,10 @@ type ShopItem = {
         flex: 1;
         font-size: 1.2em;
     }
+
+    input {
+        max-width: 60vw;
+    }
     input[type='button'] {
         font-size: 1em;
         margin-left: auto;
