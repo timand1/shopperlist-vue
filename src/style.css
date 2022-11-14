@@ -77,17 +77,17 @@ button:focus-visible {
 
 /* Light mode */
   * .light {
-    color: #4c7972;
-    background-color: #ffffff;
+    color: #4c7972 !important;
+    background-color: #ffffff !important;
   }
   .light a:hover {
-    color: #747bff;
+    color: #747bff !important;
   }
   .light button {
-    background-color: #4c7972;
+    background-color: #4c7972 !important;
   }
   .light input[type='button'] {
-    background-color: #4c7972;
+    background-color: #4c7972 !important;
   }
 
   .light .toggle-list {
@@ -96,7 +96,7 @@ button:focus-visible {
   
   .light .toggle-list:hover {
     background: #6a7c70 !important;
-    color: rgba(255, 255, 255, 0.87);
+    color: rgba(255, 255, 255, 0.87) !important;
   }
   .light .list-active {
       background: #9fbea6 !important;
