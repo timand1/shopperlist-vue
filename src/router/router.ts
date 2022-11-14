@@ -19,7 +19,7 @@ const routes = [
     name: "Lists",
     component: Lists,
   },
-  { path: '*', component: LogIn }
+  { path: '/*', component: LogIn }
 ];
 
 
