@@ -198,4 +198,8 @@ export default  defineComponent({
         background: #4c7972;
         width: 100%;
     }
+    .delete-overlay button {
+        background: #2f4b47;
+    }
+    
 </style>

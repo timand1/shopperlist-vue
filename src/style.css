@@ -57,8 +57,13 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
+input[type="button"] {
+  background-color: #4c7972;
+  color: rgba(255, 255, 255, 0.87);
+}
 button:hover {
-  border-color: #646cff;
+  border-color: #67aaa0;
 }
 button:focus,
 button:focus-visible {
@@ -86,6 +91,10 @@ button:focus-visible {
     background-color: #4c7972 !important;
     color: rgba(255, 255, 255, 0.87) !important;
   }
+
+  .light .delete-overlay button {
+    background: #2f4b47  !important;
+}
   .light input[type='button'] {
     background-color: #4c7972 !important;
     color: rgba(255, 255, 255, 0.87) !important;
