@@ -132,7 +132,6 @@ export default  defineComponent({
     }
     input {
         flex: 6;
-        outline: none;
         border: none;
     }
     button {

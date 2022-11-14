@@ -2,7 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 * {
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 }
 html {
   font-family: "Roboto Condensed", sans-serif;
