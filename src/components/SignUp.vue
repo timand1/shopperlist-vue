@@ -52,6 +52,9 @@
                 } else {
                     this.credentialsError = true
                 }
+            },
+            goToStart() {
+                this.$router.push('/')
             }
         }
     }
@@ -59,34 +62,90 @@
 <template>
 
     <section class="signup">
+        <h1>Vueshopper</h1>
         <h2>Signup</h2>
+        <img src="../assets/logo.svg" alt="">
         <form action="">
-            <div>
+            <div class="input-container">
                 <label for="username">Username</label>
                 <input type="text" name="username" v-model="username">
             </div>
-            <div>
+            <div class="input-container">
                 <label for="email">Email</label>
                 <input type="email" name="email" v-model="email">
             </div>
-            <div>
+            <div class="input-container">
                 <label for="password">Password</label>
                 <input type="password" name="password" v-model="password">
             </div>
             <p class="error-input" v-if="credentialsError">Input fields cannot be empty</p>
             <input type="button" value="Create Account" @click="handleSignUp">
         </form>
+        <p @click="goToStart" class="back">Go back</p>
     </section>
 </template>
 
 <style scoped>
     .signup {
-        max-width: 1280px;
-        margin: 0 auto;
+        margin-top: 4em;
+        width: 90%;
         padding: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1 {
+        margin: 0 auto;
+    }
+
+    img {
+        width: 40vw;
+        margin: 4em auto;
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .input-container {
+        display: flex;
+        gap: 1em;
+    }
+
+    input[type="button"] {
+        align-self: center;
+        padding: 0.8em 0.8em;
+        margin-top: 1em;
+        border: none;
+    }
+
+    input, label {
+        flex: 1;
+        font-weight: 700;
+    }
+    .back {
+        cursor: pointer;
+        margin-top: 4em;
+        align-self: center;
+        font-size: 0.8em;
     }
     .error-input {
         color: red;
         font-size: 0.8em;
     }
+
+    @media screen and (min-width: 786px) {
+        .signup {
+            max-width: 40vw;
+            margin: 0 auto;
+            margin-top: 4em;
+        }
+
+        img {
+            width: 15vw;
+        }
+  }
 </style>

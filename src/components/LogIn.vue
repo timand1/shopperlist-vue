@@ -115,6 +115,8 @@
         font-weight: 700;
     }
     .sign-up {
+        margin-top: 4em;
+        align-self: center;
         font-size: 0.8em;
     }
     .sign-up span {
