@@ -189,7 +189,7 @@ export default  defineComponent({
     }
 
     .delete-overlay {
-        padding: 1em;
+        padding: 1em 0;
         position: fixed;
         display: flex;
         justify-content: space-evenly;
