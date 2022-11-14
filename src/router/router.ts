@@ -19,7 +19,9 @@ const routes = [
     name: "Lists",
     component: Lists,
   },
+  { path: '*', component: LogIn }
 ];
+
 
 const router = createRouter({
   history: createWebHistory(),
