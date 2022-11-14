@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter } from "vue-router";
+import { createWebHashHistory, createRouter } from "vue-router";
 import LogIn from '../components/LogIn.vue'
 import SignUp from '../components/SignUp.vue'
 import Lists from '../components/Lists.vue'
@@ -10,12 +10,12 @@ const routes = [
     component: LogIn,
   },
   {
-    path: "/#/signUp",
+    path: "/signUp",
     name: "SignUp",
     component: SignUp,
   },
   {
-    path: "/#/lists",
+    path: "/lists",
     name: "Lists",
     component: Lists,
   },
@@ -24,7 +24,7 @@ const routes = [
 
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes
 });
 
