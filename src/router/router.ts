@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter } from "vue-router";
+import { createWebHashHistory, createRouter } from "vue-router";
 import LogIn from '../components/LogIn.vue'
 import SignUp from '../components/SignUp.vue'
 import Lists from '../components/Lists.vue'
@@ -24,8 +24,8 @@ const routes = [
 
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+  history: createWebHashHistory(),
+  routes
 });
 
 export default router;
